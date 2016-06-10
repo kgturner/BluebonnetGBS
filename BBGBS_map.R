@@ -3,7 +3,7 @@
 
 library(maps)
 library(mapdata)
-map("worldHires","Canada”, , col="gray90”, fill=TRUE)
+map('county','texas', col='gray90', fill=TRUE)
 
 pop <- read.table("BBpop.txt", header=TRUE, stringsAsFactor=FALSE)
 pop <- subset(pop, GBS=="y")
@@ -21,7 +21,8 @@ png("BBGBSpopMap_closeup.png", width=665, height = 500, pointsize = 12)
 par(mar=c(0,0,0,0))
 
 # map(database="county",xlim=c(-107,-93.5), ylim=c(26,36.5),col= "gray90", fill=TRUE)
-map(database="county",xlim=c(-100,-96), ylim=c(29.6,32.5),col= "gray90", fill=TRUE)
+map("county","texas",xlim=c(-101,-96), ylim=c(25,33),col= "gray90", fill=TRUE)
+# xlim=c(-100,-96), ylim=c(29.6,32.5)
 
 
 points(pop$lon, pop$lat, pch=pop$pch, col="blue", cex=2,lwd=2 ) #lwd=2
