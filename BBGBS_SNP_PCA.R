@@ -7,6 +7,149 @@ library(SNPRelate)
 library(gdsfmt)
 library(ggplot2)
 
+#########dDocent snps, filtered, lane 7 only#########
+FAM<-read.table(file="dDocL7.FinalSNPs.fam",sep=" ", header=FALSE,na="NA")
+head(FAM)
+dim(FAM)
+unique(FAM$V1)
+
+bim<-read.table(file="dDocL7.FinalSNPs.bim",sep="\t", header=FALSE,na="NA")
+head(bim)
+dim(bim) 
+#only 10555 snps/rows in this file, should be 10719. WTF is plink doing?
+#try straight from vcf?
+# vcf.fn<-"~/xxx/tmp.vcf"
+# snpgdsVCF2GDS(vcf.fn, "ccm.gds",  method="biallelic.only")
+
+POPINFO=read.table(file="bbpopmap.txt",header=F)
+names(POPINFO) <- c("IndivID", "Population", "PopType")
+POPINFO$Population <- as.factor(POPINFO$Population)
+table(POPINFO$Population) #still includes individuals that were dropped because of poor coverage
+POPINFO <- subset(POPINFO, IndivID%in%FAM$V2)
+POPINFO$IndivID <- factor(POPINFO$IndivID) #droplevels() didn't work for some reason...
+
+sum(POPINFO$IndivID!=FAM$V2)
+
+bed.fn <- "C:/Users/Kat/Documents/GitHub/BluebonnetGBS/dDocL7.FinalSNPs.bed"
+fam.fn <- "C:/Users/Kat/Documents/GitHub/BluebonnetGBS/dDocL7.FinalSNPs.fam"
+bim.fn <- "C:/Users/Kat/Documents/GitHub/BluebonnetGBS/dDocL7.FinalSNPs.bim"
+
+# convert
+snpgdsBED2GDS(bed.fn, fam.fn, bim.fn, "FinalSNPs.gds")
+#summary
+snpgdsSummary("FinalSNPs.gds")
+
+## Open the GDS file
+genofile <- snpgdsOpen("FinalSNPs.gds")
+head(genofile)
+
+head(read.gdsn(index.gdsn(genofile, "sample.id")))
+head(read.gdsn(index.gdsn(genofile, "snp.id")))
+
+## Now perform a PCA using a function from the SNPRelate package
+pca <- snpgdsPCA(genofile, autosome.only=FALSE)
+
+
+tab <- data.frame(sample.id = pca$sample.id,
+                  EV1 = pca$eigenvect[,1],    # the first eigenvector
+                  EV2 = pca$eigenvect[,2],    # the second eigenvector
+                  stringsAsFactors = FALSE)
+head(tab)
+
+plot(tab$EV2, tab$EV1, xlab="eigenvector 2", ylab="eigenvector 1")
+
+##  by population
+sample.id <- read.gdsn(index.gdsn(genofile, "sample.id"))
+population=POPINFO$Population
+
+tab <- data.frame(sample.id = pca$sample.id,
+                  pop = factor(population)[match(pca$sample.id, sample.id)],
+                  EV1 = pca$eigenvect[,1],    # the first eigenvector
+                  EV2 = pca$eigenvect[,2],    # the second eigenvector
+                  stringsAsFactors = FALSE)
+head(tab)
+
+plot(tab$EV2, tab$EV1, col=as.integer(tab$pop), xlab="eigenvector 2", ylab="eigenvector 1", main="PCA using all SNPs")
+legend("bottomright", legend=levels(tab$pop), pch="o", col=1:(nlevels(tab$pop)))
+#not enough colors for all of the populations
+
+#seeded vs wild
+sample.id <- read.gdsn(index.gdsn(genofile, "sample.id"))
+PopType=POPINFO$PopType
+population=POPINFO$Population
+
+tab <- data.frame(sample.id = pca$sample.id,
+                  population = factor(population)[match(pca$sample.id, sample.id)],
+                  poptype = factor(PopType)[match(pca$sample.id, sample.id)],
+                  EV1 = pca$eigenvect[,1],    # the first eigenvector
+                  EV2 = pca$eigenvect[,2],    # the second eigenvector
+                  EV3 = pca$eigenvect[,3],    # the third eigenvector
+                  EV4 = pca$eigenvect[,4],    # the forth eigenvector
+                  stringsAsFactors = FALSE)
+head(tab)
+
+plot(tab$EV2, tab$EV1, col=as.integer(tab$poptype), xlab="eigenvector 2", ylab="eigenvector 1", main="PCA using all SNPs")
+legend("bottomright", legend=levels(tab$poptype), pch="o", col=1:(nlevels(tab$poptype)))
+
+library(ggplot2)
+png("FinalSNPsPCA_1v2.png")
+ggplot(tab, aes(x=EV1, y=EV2, color=poptype))+
+  geom_point(shape=16)+
+  xlab("PC1")+ylab("PC2")+
+  theme(legend.title=element_blank())
+dev.off()
+
+png("FinalSNPsPCA_3v4.png")
+ggplot(tab, aes(x=EV3, y=EV4, color=poptype))+
+  geom_point(shape=16)+
+  xlab("PC3")+ylab("PC4")+
+  theme(legend.title=element_blank())
+dev.off()
+
+## Now make scatterplots of the top 4 PCs with proportional variance explained included
+pc.percent <- pca$varprop*100
+head(round(pc.percent, 2))
+lbls <- paste("PC", 1:4, "\n", format(pc.percent[1:4], digits=2), "%", sep="")
+png("FinalSNPsPCA_1thru4.png")
+pairs(pca$eigenvect[,1:4], col=tab$poptype, labels=lbls)
+dev.off()
+
+
+## Do we need 10K SNPs for population structure infererence in this sample?
+##Identify a subset of SNPs based on LD threshold of 0.2 
+# snpset <- snpgdsLDpruning(genofile, ld.threshold=0.01, autosome.only=F)
+# snpset.id <- unlist(snpset)
+#not sure I can assess ld here...anyway ld.thresholds of 0.2, 0.5, 0.01 all return "0 SNPs are selected in total."
+
+##Estimate proportional Ancestry from the PCA.
+#hmmm, doesn't really work, since I only have two groups, not two groups + derived group
+avgseed=mean(pca2$eigenvect[PopType=="seed",2])
+avgwild=mean(pca2$eigenvect[PopType=="wild",2])
+
+admix=(pca$eigenvect[,2])/(avgseed-avgwild)
+
+tab3=cbind(admix,1-admix)
+myorder=order(admix)
+temp=t(as.matrix(tab3[myorder,]))
+# temp=t(as.matrix(tab3))
+
+png("ancestryaRt2.png")
+barplot(temp, col=c("blue","green"),xlab="Individual ", ylab="Ancestry", border=NA,axisnames=FALSE,main="Ancestry of wild",ylim=c(0,1))
+legend("bottomright", c("seed","wild"), lwd=4, col=c("blue","green"), bg="white",cex=0.85)
+dev.off()
+
+#example from SISG AssMap course notes
+# ##   Estimate proportional Native American and European Ancestry for the MXL from the PCA.  ## ASSUME THAT MXL have negligible African Ancestry.
+# avgCEU2=mean(pca2$eigenvect[population=="CEU",2])
+# avgNAM2=mean(pca2$eigenvect[population=="NAM",2])
+# MXLadmix=(pca2$eigenvect[population=="MXL",2]-avgNAM2)/(avgCEU2-avgNAM2)
+# ### NOW MAKE A BARPLOT OF MXL  ESTIMATED ANCESTRY FROM THE PCA ###
+# tab2=cbind(MXLadmix,1-MXLadmix)
+# myorder=order(MXLadmix)
+# temp=t(as.matrix(tab2[myorder,]))
+# barplot(temp, col=c("blue","green"),xlab="Individual ", ylab="Ancestry", border=NA,axisnames=FALSE,main="Ancestry of MXL",ylim=c(0,1))
+# legend("bottomright", c("European","Native American"), lwd=4, col=c("blue","green"), bg="white",cex=0.85)
+
 
 ####prelim dataset, pop3####
 # PLINK BED files
