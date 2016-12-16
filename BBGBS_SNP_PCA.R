@@ -7,6 +7,119 @@ library(SNPRelate)
 library(gdsfmt)
 library(ggplot2)
 
+####dDocent snps, filtered, concatenated both lanes####
+
+vcf.fn <- "C:/Users/Kat/Documents/GitHub/BluebonnetGBS/dDoccat.FinalSNP.vcf"
+snpgdsVCF2GDS(vcf.fn, "catFinalSNPs.gds",  method="biallelic.only") #wtf why 11608 variants, should have 11741?
+
+POPINFO=read.table(file="bbpopmap.txt",header=F)
+names(POPINFO) <- c("IndivID", "Population", "PopType")
+POPINFO$Population <- as.factor(POPINFO$Population)
+table(POPINFO$Population) #still includes individuals that were dropped because of poor coverage
+# POPINFO <- subset(POPINFO, IndivID%in%FAM$V2)
+# POPINFO$IndivID <- factor(POPINFO$IndivID) #droplevels() didn't work for some reason...
+
+# # sum(POPINFO$IndivID!=FAM$V2)
+
+#summary
+snpgdsSummary("catFinalSNPs.gds")
+
+## Open the GDS file
+genofile <- snpgdsOpen("catFinalSNPs.gds")
+head(genofile)
+
+head(read.gdsn(index.gdsn(genofile, "sample.id")))
+head(read.gdsn(index.gdsn(genofile, "snp.id")))
+
+## Now perform a PCA using a function from the SNPRelate package
+pca <- snpgdsPCA(genofile, autosome.only=FALSE)
+
+
+tab <- data.frame(sample.id = pca$sample.id,
+                  EV1 = pca$eigenvect[,1],    # the first eigenvector
+                  EV2 = pca$eigenvect[,2],    # the second eigenvector
+                  stringsAsFactors = FALSE)
+head(tab)
+
+plot(tab$EV2, tab$EV1, xlab="eigenvector 2", ylab="eigenvector 1")
+
+##  by population
+sample.id <- read.gdsn(index.gdsn(genofile, "sample.id"))
+population=POPINFO$Population
+
+tab <- data.frame(sample.id = pca$sample.id,
+                  pop = factor(population)[match(pca$sample.id, sample.id)],
+                  EV1 = pca$eigenvect[,1],    # the first eigenvector
+                  EV2 = pca$eigenvect[,2],    # the second eigenvector
+                  stringsAsFactors = FALSE)
+head(tab)
+
+plot(tab$EV2, tab$EV1, col=as.integer(tab$pop), xlab="eigenvector 2", ylab="eigenvector 1", main="PCA using all SNPs")
+legend("bottomright", legend=levels(tab$pop), pch="o", col=1:(nlevels(tab$pop)))
+#not enough colors for all of the populations
+
+#seeded vs wild
+sample.id <- read.gdsn(index.gdsn(genofile, "sample.id"))
+PopType=POPINFO$PopType
+population=POPINFO$Population
+
+tab <- data.frame(sample.id = pca$sample.id,
+                  population = factor(population)[match(pca$sample.id, sample.id)],
+                  poptype = factor(PopType)[match(pca$sample.id, sample.id)],
+                  EV1 = pca$eigenvect[,1],    # the first eigenvector
+                  EV2 = pca$eigenvect[,2],    # the second eigenvector
+                  EV3 = pca$eigenvect[,3],    # the third eigenvector
+                  EV4 = pca$eigenvect[,4],    # the forth eigenvector
+                  stringsAsFactors = FALSE)
+head(tab)
+
+plot(tab$EV2, tab$EV1, col=as.integer(tab$poptype), xlab="eigenvector 2", ylab="eigenvector 1", main="PCA using all SNPs")
+legend("bottomright", legend=levels(tab$poptype), pch="o", col=1:(nlevels(tab$poptype)))
+
+library(ggplot2)
+png("FinalSNPsPCA_1v2.png")
+ggplot(tab, aes(x=EV1, y=EV2, color=poptype))+
+  geom_point(shape=16, size=5)+
+  xlab("PC1")+ylab("PC2")+
+  theme(legend.title=element_blank(), legend.text=element_text(size=20), axis.title=element_text(size=20))
+dev.off()
+
+library(plyr)
+tab_mean <- ddply(tab, .(population,poptype), summarize,
+                  popPC1=mean(EV1), popPC2=mean(EV2))
+png("FinalSNPsPCA_1v2_mean.png")
+ggplot(tab_mean, aes(x=popPC1, y=popPC2, color=poptype, label=population))+
+  geom_point(shape=16, size=5)+
+  xlab("PC1")+ylab("PC2")+
+  geom_text(size=7,hjust = 0, nudge_x = 0.01)+
+  xlim(-0.2,0.15)+
+  theme(legend.title=element_blank(), legend.text=element_text(size=20), axis.title=element_text(size=20))
+dev.off()
+
+
+png("FinalSNPsPCA_3v4.png")
+ggplot(tab, aes(x=EV3, y=EV4, color=poptype))+
+  geom_point(shape=16)+
+  xlab("PC3")+ylab("PC4")+
+  theme(legend.title=element_blank())
+dev.off()
+
+## Now make scatterplots of the top 4 PCs with proportional variance explained included
+pc.percent <- pca$varprop*100
+head(round(pc.percent, 2))
+lbls <- paste("PC", 1:4, "\n", format(pc.percent[1:4], digits=2), "%", sep="")
+png("FinalSNPsPCA_1thru4.png")
+pairs(pca$eigenvect[,1:4], col=tab$poptype, labels=lbls)
+dev.off()
+
+
+# Do we need 10K SNPs for population structure infererence in this sample?
+#Identify a subset of SNPs based on LD threshold of 0.2 
+snpset <- snpgdsLDpruning(genofile, ld.threshold=0.01, autosome.only=F)
+snpset.id <- unlist(snpset)
+str(snpset.id)
+#treats each contig as chr... not sure that's ok
+
 #########dDocent snps, filtered, lane 7 only#########
 # FAM<-read.table(file="dDocL7.FinalSNPs.fam",sep=" ", header=FALSE,na="NA")
 # head(FAM)
