@@ -8,34 +8,34 @@ library(gdsfmt)
 library(ggplot2)
 
 #########dDocent snps, filtered, lane 7 only#########
-FAM<-read.table(file="dDocL7.FinalSNPs.fam",sep=" ", header=FALSE,na="NA")
-head(FAM)
-dim(FAM)
-unique(FAM$V1)
-
-bim<-read.table(file="dDocL7.FinalSNPs.bim",sep="\t", header=FALSE,na="NA")
-head(bim)
-dim(bim) 
+# FAM<-read.table(file="dDocL7.FinalSNPs.fam",sep=" ", header=FALSE,na="NA")
+# head(FAM)
+# dim(FAM)
+# unique(FAM$V1)
+# 
+# bim<-read.table(file="dDocL7.FinalSNPs.bim",sep="\t", header=FALSE,na="NA")
+# head(bim)
+# dim(bim) 
 #only 10555 snps/rows in this file, should be 10719. WTF is plink doing?
 #try straight from vcf?
-# vcf.fn<-"~/xxx/tmp.vcf"
-# snpgdsVCF2GDS(vcf.fn, "ccm.gds",  method="biallelic.only")
+vcf.fn <- "C:/Users/Kat/Documents/GitHub/BluebonnetGBS/dDocL7.FinalSNPs.recode.vcf"
+snpgdsVCF2GDS(vcf.fn, "FinalSNPs.gds",  method="biallelic.only") #wtf, still have 10,555 variants, instead of 10719
 
 POPINFO=read.table(file="bbpopmap.txt",header=F)
 names(POPINFO) <- c("IndivID", "Population", "PopType")
 POPINFO$Population <- as.factor(POPINFO$Population)
 table(POPINFO$Population) #still includes individuals that were dropped because of poor coverage
-POPINFO <- subset(POPINFO, IndivID%in%FAM$V2)
+# POPINFO <- subset(POPINFO, IndivID%in%FAM$V2)
 POPINFO$IndivID <- factor(POPINFO$IndivID) #droplevels() didn't work for some reason...
 
-sum(POPINFO$IndivID!=FAM$V2)
+# sum(POPINFO$IndivID!=FAM$V2)
 
-bed.fn <- "C:/Users/Kat/Documents/GitHub/BluebonnetGBS/dDocL7.FinalSNPs.bed"
-fam.fn <- "C:/Users/Kat/Documents/GitHub/BluebonnetGBS/dDocL7.FinalSNPs.fam"
-bim.fn <- "C:/Users/Kat/Documents/GitHub/BluebonnetGBS/dDocL7.FinalSNPs.bim"
-
-# convert
-snpgdsBED2GDS(bed.fn, fam.fn, bim.fn, "FinalSNPs.gds")
+# bed.fn <- "C:/Users/Kat/Documents/GitHub/BluebonnetGBS/dDocL7.FinalSNPs.bed"
+# fam.fn <- "C:/Users/Kat/Documents/GitHub/BluebonnetGBS/dDocL7.FinalSNPs.fam"
+# bim.fn <- "C:/Users/Kat/Documents/GitHub/BluebonnetGBS/dDocL7.FinalSNPs.bim"
+# 
+# # convert
+# snpgdsBED2GDS(bed.fn, fam.fn, bim.fn, "FinalSNPs.gds")
 #summary
 snpgdsSummary("FinalSNPs.gds")
 
@@ -94,10 +94,23 @@ legend("bottomright", legend=levels(tab$poptype), pch="o", col=1:(nlevels(tab$po
 library(ggplot2)
 png("FinalSNPsPCA_1v2.png")
 ggplot(tab, aes(x=EV1, y=EV2, color=poptype))+
-  geom_point(shape=16)+
+  geom_point(shape=16, size=5)+
   xlab("PC1")+ylab("PC2")+
-  theme(legend.title=element_blank())
+  theme(legend.title=element_blank(), legend.text=element_text(size=20), axis.title=element_text(size=20))
 dev.off()
+
+library(plyr)
+tab_mean <- ddply(tab, .(population,poptype), summarize,
+               popPC1=mean(EV1), popPC2=mean(EV2))
+png("FinalSNPsPCA_1v2_mean.png")
+ggplot(tab_mean, aes(x=popPC1, y=popPC2, color=poptype, label=population))+
+  geom_point(shape=16, size=5)+
+  xlab("PC1")+ylab("PC2")+
+  geom_text(size=7,hjust = 0, nudge_x = 0.01)+
+  xlim(-0.2,0.15)+
+  theme(legend.title=element_blank(), legend.text=element_text(size=20), axis.title=element_text(size=20))
+dev.off()
+
 
 png("FinalSNPsPCA_3v4.png")
 ggplot(tab, aes(x=EV3, y=EV4, color=poptype))+
