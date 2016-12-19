@@ -16,8 +16,9 @@ POPINFO=read.table(file="bbpopmap.txt",header=F)
 names(POPINFO) <- c("IndivID", "Population", "PopType")
 POPINFO$Population <- as.factor(POPINFO$Population)
 table(POPINFO$Population) #still includes individuals that were dropped because of poor coverage
-# POPINFO <- subset(POPINFO, IndivID%in%FAM$V2)
-# POPINFO$IndivID <- factor(POPINFO$IndivID) #droplevels() didn't work for some reason...
+
+POPINFO <- subset(POPINFO, IndivID%in%sample.id)
+POPINFO$IndivID <- factor(POPINFO$IndivID) #droplevels() didn't work for some reason...
 
 # # sum(POPINFO$IndivID!=FAM$V2)
 
@@ -119,6 +120,148 @@ snpset <- snpgdsLDpruning(genofile, ld.threshold=0.01, autosome.only=F)
 snpset.id <- unlist(snpset)
 str(snpset.id)
 #treats each contig as chr... not sure that's ok
+
+####ellipses and centroids####
+# #95% conf limits of clusters####
+# # http://stackoverflow.com/questions/20260434/test-significance-of-clusters-on-a-pca-plot
+# # draw 95% confidence ellipses around clusters. Note that stat_ellipse(...) uses the bivariate t-distribution.
+scores <- pca$eigenvect[,1:3]                       # scores for first three PC's
+# 
+# k-means clustering [assume 2 clusters]
+km     <- kmeans(scores, centers=2, nstart=5)
+ggdata <- data.frame(scores, Cluster=km$cluster, PopType=POPINFO$PopType, Pop=POPINFO$Population)
+levels(ggdata$PopType)[levels(ggdata$PopType)=="seed"] <- "Seeded populations"
+levels(ggdata$PopType)[levels(ggdata$PopType)=="wild"] <- "Wild populations"
+
+# stat_ellipse is not part of the base ggplot package
+source("https://raw.github.com/low-decarie/FAAV/master/r/stat-ellipse.R") 
+
+#centroid based on origin
+centroids <- aggregate(cbind(X1,X2)~PopType,data=ggdata,mean)
+#PC1 vs PC2
+# plot <- ggplot(ggdata, aes_string(x="X1", y="X2")) +
+#   geom_point(aes(color=factor(Cluster),shape=PopType), size=5) +
+#   stat_ellipse(aes(x=X1,y=X2,fill=factor(Cluster)),
+#                geom="polygon", level=0.95, alpha=0.2) +
+#   guides(color=guide_legend("Cluster"),fill=guide_legend("Cluster"))
+# plot
+#95% plot
+Oplot <- ggplot(ggdata, aes_string(x="X1", y="X2")) +
+  geom_point(aes(color=factor(PopType),shape=PopType), size=3) +
+  guides(color=guide_legend("PopType"),fill=guide_legend("PopType"))+   #
+  stat_ellipse(aes(x=X1,y=X2,fill=factor(PopType)),
+               geom="polygon", level=0.95, alpha=0.2) +
+  geom_point(data=centroids, aes(x=X1, y=X2, color=PopType, shape=PopType), size=8)+
+  #coord_cartesian(ylim = c(-6.5, 8.5)) +
+  theme_bw() + 
+  theme(legend.justification=c(0.1,0), legend.position=c(0.1,0),
+        legend.title = element_text(size=10, face="bold"),
+        legend.text = element_text(size = 10))
+
+Oplot
+ggsave("BB_PCA_fig.pdf", width=6.65, height = 5)
+ggsave("BB_PCA_fig.png", width=6.65, height = 5)
+
+svg("BB_PCA_fig.svg", width=6.65, height=5, pointsize = 12)
+Oplot
+dev.off()
+
+# #99%plot
+# plot99 <- ggplot(ggdata, aes_string(x="PC1", y="PC2")) +
+#   geom_point(aes(color=factor(Origin),shape=Origin), size=3) +
+#   guides(color=guide_legend("Origin"),fill=guide_legend("Origin"))+
+#   stat_ellipse(aes(x=PC1,y=PC2,fill=factor(Origin)),
+#                geom="polygon", level=0.99, alpha=0.2) +
+#   geom_point(data=centroids, aes(x=PC1, y=PC2, color=Origin, shape=Origin), size=8)+
+#   #coord_cartesian(ylim = c(-6.5, 8.5)) +
+#   theme_bw() + 
+#   theme(legend.justification=c(1,0), legend.position=c(1,0),
+#         legend.title = element_text(size=10, face="bold"),
+#         legend.text = element_text(size = 10))
+# 
+# plot99
+# ggsave("KTurnerFig4_99.png", width=6.65, height = 5)
+# #99.9%plot
+# plot999 <- ggplot(ggdata, aes_string(x="PC1", y="PC2")) +
+#   geom_point(aes(color=factor(Origin),shape=Origin), size=3) +
+#   guides(color=guide_legend("Origin"),fill=guide_legend("Origin"))+
+#   stat_ellipse(aes(x=PC1,y=PC2,fill=factor(Origin)),
+#                geom="polygon", level=0.999, alpha=0.2) +
+#   geom_point(data=centroids, aes(x=PC1, y=PC2, color=Origin, shape=Origin), size=8)+
+#   #coord_cartesian(ylim = c(-6.5, 8.5)) +
+#   theme_bw() + 
+#   theme(legend.justification=c(1,0), legend.position=c(1,0),
+#         legend.title = element_text(size=10, face="bold"),
+#         legend.text = element_text(size = 10))
+# 
+# plot999
+# ggsave("KTurnerFig4_999.png", width=6.65, height = 5)
+# #PC1 vs PC3
+# plot <- ggplot(ggdata, aes_string(x="PC1", y="PC3")) +
+#   geom_point(aes(color=factor(Origin),shape=Origin), size=3) +
+#   stat_ellipse(aes(x=PC1,y=PC3,fill=factor(Origin)),
+#                geom="polygon", level=0.95, alpha=0.2) +
+#   guides(color=guide_legend("Origin"),fill=guide_legend("Origin"))
+# plot
+# 
+# #orienting
+# head(subset(allclim2, PC1< -4))
+# head(subset(allclim2, PC1> 4))
+# 
+# head(subset(allclim2, PC2< -4))
+# head(subset(allclim2, PC2> 4))
+# 
+####exploratory clustering####
+library(devtools)
+install_github("dgrtwo/broom")
+library(broom)
+
+library(dplyr)
+
+kclusts <- data.frame(k=1:9) %>% group_by(k) %>% do(km=kmeans(scores, .$k))
+clusters <- kclusts %>% group_by(k) %>% do(tidy(.$km[[1]]))
+assignments <- kclusts %>% group_by(k) %>% do(augment(.$km[[1]], scores))
+clusterings <- kclusts %>% group_by(k) %>% do(glance(.$km[[1]]))
+
+p1 <- ggplot(assignments, aes(X1, X2)) + geom_point(aes(color=.cluster)) + facet_wrap(~ k)
+p1
+p2 <- ggplot(assignments, aes(PC1, PC3)) + geom_point(aes(color=.cluster)) + facet_wrap(~ k)
+p2
+p3 <- p1 + geom_point(data=clusters, size=10, shape="x")
+p3
+# 
+# ####ade4 to quantify centroid shift####
+# library(ade4)
+# 
+# allclim.dudi <- dudi.pca(allclim[c(2,7:26)], center = TRUE, scale = TRUE,scannf = TRUE, nf = 2)
+# 2
+# allclim.bca <- bca(allclim.dudi, fac=allclim$Origin, scannf=TRUE, nf=2) #p36
+# 2
+# summary(allclim.bca)
+# print(allclim.bca)
+# allclim.bca$ratio
+# [1] 0.0684579
+# randtest(allclim.bca, nrept=999)
+# plot(randtest(allclim.bca, nrept=999))
+# 
+# ####inherent clusters?####
+# scores <- allclim.pca$x[,1:3]                        # scores for first three PC's
+# 
+# # k-means clustering [assume 2 clusters]
+# km     <- kmeans(scores, centers=2, nstart=10)
+# ggdata <- data.frame(scores, Cluster=km$cluster, Origin=allclim$Origin, alt=allclim$alt,Pop=allclim$Pop,Latitude=allclim$Latitude)
+# 
+# # stat_ellipse is not part of the base ggplot package
+# source("https://raw.github.com/low-decarie/FAAV/master/r/stat-ellipse.R") 
+# 
+# #PC1 vs PC2
+# plot <- ggplot(ggdata, aes_string(x="PC1", y="PC2")) +
+#   geom_point(aes(color=factor(Cluster),shape=Origin), size=5) +
+#   stat_ellipse(aes(x=PC1,y=PC2,fill=factor(Cluster)),
+#                geom="polygon", level=0.95, alpha=0.2) +
+#   guides(color=guide_legend("Cluster"),fill=guide_legend("Cluster"))
+# plot
+
 
 #########dDocent snps, filtered, lane 7 only#########
 # FAM<-read.table(file="dDocL7.FinalSNPs.fam",sep=" ", header=FALSE,na="NA")
