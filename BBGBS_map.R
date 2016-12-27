@@ -17,16 +17,17 @@ pop$long <- as.numeric(pop$long)
 pop$elev <- as.numeric(pop$elev)
 pop$pch <- as.numeric(pop$pch)
 
-png("BBGBSpopMap_closeup.png", width=665, height = 500, pointsize = 12)
+png("BBGBSpopMap_closeup_labeled.png", width=1000, height = 1000, pointsize = 12)
 par(mar=c(0,0,0,0))
 
 # map(database="county",xlim=c(-107,-93.5), ylim=c(26,36.5),col= "gray90", fill=TRUE)
 map("county","texas",xlim=c(-101,-96), ylim=c(25,33),col= "gray90", fill=TRUE)
 # xlim=c(-100,-96), ylim=c(29.6,32.5)
+map("county","texas",col= "gray90", fill=TRUE)
 
 
 points(pop$lon, pop$lat, pch=pop$pch, col="blue", cex=2,lwd=2 ) #lwd=2
-
+text(jitter(pop$lon, amount=0.4), jitter(pop$lat, amount=0.4),labels=pop$popName, cex=1.75)
 
 dev.off()
 
