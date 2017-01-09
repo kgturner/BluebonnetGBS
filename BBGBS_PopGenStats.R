@@ -20,7 +20,7 @@ bbsnp <- read.structure("dDoccat.FinalSNP.str")
 # 1: 3
 # 2: 4
 # 3: 
-#   Which row contains the marker names ('0' if absent)? 
+#   Which row contains the marker names ('0' if absent)? ###file version on work laptop does not have this row!!!
 # 1
 # Are genotypes coded by a single row (y/n)? 
 # n

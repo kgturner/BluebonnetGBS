@@ -4,7 +4,7 @@
 source("https://bioconductor.org/biocLite.R")
 biocLite("SNPRelate")
 library(SNPRelate)
-library(gdsfmt)
+# library(gdsfmt)
 library(ggplot2)
 
 ####dDocent snps, filtered, concatenated both lanes####
@@ -140,19 +140,46 @@ source("https://raw.github.com/low-decarie/FAAV/master/r/stat-ellipse.R")
 centroids <- aggregate(cbind(X1,X2)~PopType,data=ggdata,mean)
 
 #95% plot
-Oplot <- ggplot(ggdata, aes_string(x="X1", y="X2")) +
-  geom_point(aes(color=factor(PopType),shape=PopType), size=3) +
-  guides(color=guide_legend("PopType"),fill=guide_legend("PopType"))+   #
-  stat_ellipse(aes(x=X1,y=X2,fill=factor(PopType)),
-               geom="polygon", level=0.95, alpha=0.2) +
+#for plot labels
+ggdata2 <- ggdata
+names(ggdata2)[5] <- "Population Type"
+names(ggdata2)[1] <- "PC1"
+names(ggdata2)[2] <- "PC2"
+
+#gray version
+Oplot <- ggplot(ggdata2, aes_string(x="PC1", y="PC2")) +
+  geom_point(aes(color=factor(`Population Type`),shape=`Population Type`), size=3) +
+  guides(color=guide_legend("Population Type"),fill=guide_legend("Population Type"))+   #
+  stat_ellipse(aes(x=PC1,y=PC2,fill=factor(`Population Type`)),
+               geom="polygon", level=0.95, alpha=0.5) +
   geom_point(data=centroids, aes(x=X1, y=X2, color=PopType, shape=PopType), size=8)+
-  #coord_cartesian(ylim = c(-6.5, 8.5)) +
+  scale_colour_grey(start = 0.3, end = .6) +
+  scale_fill_grey(start = 0.3, end = .9) +
   theme_bw() + 
-  theme(legend.justification=c(0.1,0), legend.position=c(0.1,0),
+  theme(legend.justification=c(0.05,0.05), legend.position=c(0.05,0.05),
         legend.title = element_text(size=10, face="bold"),
         legend.text = element_text(size = 10))
-
 Oplot
+ggsave("BB_PCA_fig_gray.pdf", width=6.65, height = 5)
+ggsave("BB_PCA_fig_gray.png", width=6.65, height = 5)
+
+# svg("BB_PCA_fig.svg", width=6.65, height=5, pointsize = 12)
+# Oplot
+# dev.off()
+
+#color version
+Oplot <- ggplot(ggdata2, aes_string(x="PC1", y="PC2")) +
+  geom_point(aes(color=factor(`Population Type`),shape=`Population Type`), size=3) +
+  guides(color=guide_legend("Population Type"),fill=guide_legend("Population Type"))+   #
+  stat_ellipse(aes(x=PC1,y=PC2,fill=factor(`Population Type`)),
+               geom="polygon", level=0.95, alpha=0.3) +
+  geom_point(data=centroids, aes(x=X1, y=X2, color=PopType, shape=PopType), size=8)+
+  theme_bw() + 
+  theme(legend.justification=c(0.05,0.05), legend.position=c(0.05,0.05),
+        legend.title = element_text(size=10, face="bold"),
+        legend.text = element_text(size = 10))
+#coord_cartesian(ylim = c(-6.5, 8.5)) +
+
 ggsave("BB_PCA_fig.pdf", width=6.65, height = 5)
 ggsave("BB_PCA_fig.png", width=6.65, height = 5)
 
@@ -187,9 +214,10 @@ library(dplyr)
 # p3
 # 
 ####ade4 to quantify centroid shift####
+#blah, need table of numerical values for this - not sure how to get it out of the SNPRelate genofile, if even possible. STR, VCF, BED, BIM, FAM, PED, MAP all won't work on their own...
 library(ade4)
 
-# allclim.dudi <- dudi.pca(allclim[c(2,7:26)], center = TRUE, scale = TRUE,scannf = TRUE, nf = 2)
+# pca.dudi <- dudi.pca(allclim[c(2,7:26)], center = TRUE, scale = TRUE,scannf = TRUE, nf = 2)
 # 2
 # allclim.bca <- bca(allclim.dudi, fac=allclim$Origin, scannf=TRUE, nf=2) #p36
 # 2
