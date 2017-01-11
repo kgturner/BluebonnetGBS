@@ -28,6 +28,8 @@ snpgdsSummary("catFinalSNPs.gds")
 ## Open the GDS file
 genofile <- snpgdsOpen("catFinalSNPs.gds")
 head(genofile)
+# # close the file
+# snpgdsClose(genofile)
 
 head(read.gdsn(index.gdsn(genofile, "sample.id")))
 head(read.gdsn(index.gdsn(genofile, "snp.id")))
@@ -130,14 +132,14 @@ scores <- pca$eigenvect[,1:3]                       # scores for first three PC'
 # k-means clustering [assume 2 clusters]
 km     <- kmeans(scores, centers=2, nstart=5)
 ggdata <- data.frame(scores, Cluster=km$cluster, PopType=POPINFO$PopType, Pop=POPINFO$Population)
-levels(ggdata$PopType)[levels(ggdata$PopType)=="seed"] <- "Seeded populations"
-levels(ggdata$PopType)[levels(ggdata$PopType)=="wild"] <- "Wild populations"
+levels(ggdata$PopType)[levels(ggdata$PopType)=="seed"] <- "Individual from seeded population"
+levels(ggdata$PopType)[levels(ggdata$PopType)=="wild"] <- "Individual from wild population"
 
 # stat_ellipse is not part of the base ggplot package
 source("https://raw.github.com/low-decarie/FAAV/master/r/stat-ellipse.R") 
 
-#centroid based on poptype
-centroids <- aggregate(cbind(X1,X2)~PopType,data=ggdata,mean)
+# #centroid based on poptype
+# centroids <- aggregate(cbind(X1,X2)~PopType,data=ggdata,mean)
 
 #95% plot
 #for plot labels
@@ -152,15 +154,16 @@ Oplot <- ggplot(ggdata2, aes_string(x="PC1", y="PC2")) +
   guides(color=guide_legend("Population Type"),fill=guide_legend("Population Type"))+   #
   stat_ellipse(aes(x=PC1,y=PC2,fill=factor(`Population Type`)),
                geom="polygon", level=0.95, alpha=0.5) +
-  geom_point(data=centroids, aes(x=X1, y=X2, color=PopType, shape=PopType), size=8)+
+  #geom_point(data=centroids, aes(x=X1, y=X2, color=PopType, shape=PopType), size=8)+
   scale_colour_grey(start = 0.3, end = .6) +
   scale_fill_grey(start = 0.3, end = .9) +
   theme_bw() + 
+  # theme(legend.position="none")
   theme(legend.justification=c(0.05,0.05), legend.position=c(0.05,0.05),
         legend.title = element_text(size=10, face="bold"),
         legend.text = element_text(size = 10))
 Oplot
-ggsave("BB_PCA_fig_gray.pdf", width=6.65, height = 5)
+ggsave("BB_PCA_fig_gray2.pdf", width=6.65, height = 5)
 ggsave("BB_PCA_fig_gray.png", width=6.65, height = 5)
 
 # svg("BB_PCA_fig.svg", width=6.65, height=5, pointsize = 12)
