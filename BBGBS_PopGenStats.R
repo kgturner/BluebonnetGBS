@@ -121,3 +121,201 @@ boot.vc(bbsnp2)
 
 x <- indpca(bbsnp2) 
 plot(x, cex = 0.7)
+
+####Calcuating Pi####
+#per pop
+pi1001 <- read.delim2("dDoccat.FinalSNP.1001Pi.windowed.pi", header = TRUE)
+nrow(pi1001)
+# [1] 3973
+nrow(subset(pi1001, N_VARIANTS > 1))
+# [1] 2475
+nrow(subset(pi1001, N_VARIANTS > 1))/nrow(pi1001)
+# [1] 0.6229549
+
+pi1002 <- read.delim2("dDoccat.FinalSNP.1002Pi.windowed.pi", header = TRUE)
+nrow(pi1002)
+# [1] 3880
+nrow(subset(pi1002, N_VARIANTS > 1))
+# [1] 2388
+nrow(subset(pi1002, N_VARIANTS > 1))/nrow(pi1002)
+# [1] 0.6154639
+
+pi1005 <- read.delim2("dDoccat.FinalSNP.1005Pi.windowed.pi", header = TRUE)
+(a <- nrow(pi1005))
+# [1] 3908
+(b <- nrow(subset(pi1005, N_VARIANTS > 1)))
+# [1] 2385
+b/a
+# [1] 0.6102866
+
+pi1006 <- read.delim2("dDoccat.FinalSNP.1006Pi.windowed.pi", header = TRUE)
+(a <- nrow(pi1006))
+# [1] 3924
+(b <- nrow(subset(pi1006, N_VARIANTS > 1)))
+# [1] 2428
+b/a
+# [1] 0.6187564
+
+pi1007 <- read.delim2("dDoccat.FinalSNP.1007Pi.windowed.pi", header = TRUE)
+(a <- nrow(pi1007))
+# [1] 3802
+(b <- nrow(subset(pi1007, N_VARIANTS > 1)))
+# [1] 2254
+b/a
+# [1] 0.5928459
+
+pi1008 <- read.delim2("dDoccat.FinalSNP.1008Pi.windowed.pi", header = TRUE)
+(a <- nrow(pi1008))
+# [1] 3841
+(b <- nrow(subset(pi1008, N_VARIANTS > 1)))
+# [1] 2342
+b/a
+# [1] 0.609737
+
+pi1101 <- read.delim2("dDoccat.FinalSNP.1101Pi.windowed.pi", header = TRUE)
+(a <- nrow(pi1101))
+# [1] 3832
+(b <- nrow(subset(pi1101, N_VARIANTS > 1)))
+# [1] 2306
+b/a
+# [1] 0.6017745
+
+pi1102 <- read.delim2("dDoccat.FinalSNP.1102Pi.windowed.pi", header = TRUE)
+(a <- nrow(pi1102))
+# [1] 3845
+(b <- nrow(subset(pi1102, N_VARIANTS > 1)))
+# [1] 2361
+b/a
+# [1] 0.6140442
+
+pi1103 <- read.delim2("dDoccat.FinalSNP.1103Pi.windowed.pi", header = TRUE)
+(a <- nrow(pi1103))
+# [1] 3804
+(b <- nrow(subset(pi1103, N_VARIANTS > 1)))
+# [1] 2273
+b/a
+# [1] 0.5975289
+
+pi1104 <- read.delim2("dDoccat.FinalSNP.1104Pi.windowed.pi", header = TRUE)
+(a <- nrow(pi1104))
+# [1] 3911
+(b <- nrow(subset(pi1104, N_VARIANTS > 1)))
+# [1] 2390
+b/a
+# [1] 0.6110969
+
+pi1105 <- read.delim2("dDoccat.FinalSNP.1105Pi.windowed.pi", header = TRUE)
+(a <- nrow(pi1105))
+# [1] 3823
+(b <- nrow(subset(pi1105, N_VARIANTS > 1)))
+# [1] 2266
+b/a
+# [1] 0.5927282
+
+pi1107 <- read.delim2("dDoccat.FinalSNP.1107Pi.windowed.pi", header = TRUE)
+(a <- nrow(pi1107))
+# [1] 3859
+(b <- nrow(subset(pi1107, N_VARIANTS > 1)))
+# [1] 2335
+b/a
+# [1] 0.605079
+
+pi1201 <- read.delim2("dDoccat.FinalSNP.1201Pi.windowed.pi", header = TRUE)
+(a <- nrow(pi1201))
+# [1] 3893
+(b <- nrow(subset(pi1201, N_VARIANTS > 1)))
+# [1] 2355
+b/a
+# [1] 0.6049319
+
+pi1202 <- read.delim2("dDoccat.FinalSNP.1202Pi.windowed.pi", header = TRUE)
+(a <- nrow(pi1202))
+# [1] 3864
+(b <- nrow(subset(pi1202, N_VARIANTS > 1)))
+# [1] 2351
+b/a
+# [1] 0.6084369
+
+pi1203 <- read.delim2("dDoccat.FinalSNP.1203Pi.windowed.pi", header = TRUE)
+(a <- nrow(pi1203))
+# [1] 3835
+(b <- nrow(subset(pi1203, N_VARIANTS > 1)))
+# [1] 2293
+b/a
+# [1] 0.597914
+
+pi1204 <- read.delim2("dDoccat.FinalSNP.1204Pi.windowed.pi", header = TRUE)
+(a <- nrow(pi1204))
+# [1] 3817
+(b <- nrow(subset(pi1204, N_VARIANTS > 1)))
+# [1] 2280
+b/a
+# [1] 0.5973277
+
+pi1205 <- read.delim2("dDoccat.FinalSNP.1205Pi.windowed.pi", header = TRUE)
+(a <- nrow(pi1205))
+# [1] 3882
+(b <- nrow(subset(pi1205, N_VARIANTS > 1)))
+# [1] 2380
+b/a
+# [1] 0.613086
+
+pi1301 <- read.delim2("dDoccat.FinalSNP.1301Pi.windowed.pi", header = TRUE)
+(a <- nrow(pi1301))
+# [1] 3855
+(b <- nrow(subset(pi1301, N_VARIANTS > 1)))
+# [1] 2313
+b/a
+# [1] 0.6
+
+pi1303 <- read.delim2("dDoccat.FinalSNP.1303Pi.windowed.pi", header = TRUE)
+(a <- nrow(pi1303))
+# [1] 3826
+(b <- nrow(subset(pi1303, N_VARIANTS > 1)))
+# [1] 2294
+b/a
+# [1] 0.5995818
+
+pi1304<- read.delim2("dDoccat.FinalSNP.1304Pi.windowed.pi", header = TRUE)
+(a <- nrow(pi1304))
+# [1] 3890
+(b <- nrow(subset(pi1304, N_VARIANTS > 1)))
+# [1] 2359
+b/a
+# [1] 0.6064267
+
+pi1601 <- read.delim2("dDoccat.FinalSNP.1601Pi.windowed.pi", header = TRUE)
+(a <- nrow(pi1601))
+# [1] 3885
+(b <- nrow(subset(pi1601, N_VARIANTS > 1)))
+# [1] 2401
+b/a
+# [1] 0.618018
+
+pi1602 <- read.delim2("dDoccat.FinalSNP.1602Pi.windowed.pi", header = TRUE)
+(a <- nrow(pi1602))
+# [1] 3876
+(b <- nrow(subset(pi1602, N_VARIANTS > 1)))
+# [1] 2391
+b/a
+# [1] 0.6168731
+
+pi1603 <- read.delim2("dDoccat.FinalSNP.1603Pi.windowed.pi", header = TRUE)
+(a <- nrow(pi1603))
+# [1] 3760
+(b <- nrow(subset(pi1603, N_VARIANTS > 1)))
+# [1] 2206
+b/a
+# [1] 0.5867021
+
+pi1604 <- read.delim2("dDoccat.FinalSNP.1604Pi.windowed.pi", header = TRUE)
+(a <- nrow(pi1604))
+# [1] 3911
+(b <- nrow(subset(pi1604, N_VARIANTS > 1)))
+# [1] 2402
+b/a
+# [1] 0.6141652
+
+#P for all pops
+(0.6141652+0.5867021+0.6168731+0.618018+0.6064267+0.5995818+0.6+0.613086+0.5973277+0.597914+0.6084369+0.6049319+0.605079+0.5927282+0.6110969+0.5975289+0.6140442+0.6017745+0.609737+ 0.5928459+0.6187564+0.6102866+0.6154639+0.6229549)/24
+# 0.60649
