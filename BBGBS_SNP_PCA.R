@@ -163,7 +163,7 @@ Oplot <- ggplot(ggdata2, aes_string(x="PC1", y="PC2")) +
         legend.title = element_text(size=10, face="bold"),
         legend.text = element_text(size = 10))
 Oplot
-ggsave("BB_PCA_fig_gray2.pdf", width=6.65, height = 5)
+ggsave("BB_PCA_fig_gray.pdf", width=6.65, height = 5)
 ggsave("BB_PCA_fig_gray.png", width=6.65, height = 5)
 
 # svg("BB_PCA_fig.svg", width=6.65, height=5, pointsize = 12)
