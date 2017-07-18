@@ -7,7 +7,7 @@ library("adegenet")
 library("hierfstat")
 library("pegas")
 
-bbsnp <- read.structure("dDoccat.FinalSNP.str")
+bbsnp <- read.structure("dDoccat.FinalSNP.stru")
 # How many genotypes are there? 
 # 187
 # How many markers are there? 
@@ -21,7 +21,7 @@ bbsnp <- read.structure("dDoccat.FinalSNP.str")
 # 2: 4
 # 3: 
 #   Which row contains the marker names ('0' if absent)? ###file version on work laptop does not have this row!!!
-# 1
+# 0
 # Are genotypes coded by a single row (y/n)? 
 # n
 # Converting data from a STRUCTURE .stru file to a genind object... 
@@ -118,6 +118,12 @@ boot.ppfst(bbsnp2) #conf int for Fst each pop; FST is the effect of subpopulatio
 #giant matrix/list thing. Takes forever!
 
 boot.vc(bbsnp2)
+# boot.vc(gtrunchier[,1],gtrunchier[,-c(1:2)])$ci
+boot.vc(bbsnp2[,1],bbsnp2[,-c(1:2)])$ci
+#       H-Total(Ht) F-Pop/Total(Fst) F-Ind/Total  H-Pop(Hs)     F-Ind/Pop(Fis)   Hobs(Ho)
+# 2.5%   0.2593      0.0142         -0.0399       0.2555   -0.0550      0.2662
+# 50%    0.2618      0.0147         -0.0319       0.2580   -0.0473      0.2702
+# 97.5%  0.2644      0.0152         -0.0237       0.2605   -0.0393      0.2739
 
 x <- indpca(bbsnp2) 
 plot(x, cex = 0.7)
