@@ -1,0 +1,1000 @@
+Pop1103_003	CTCGCA	CTTGTA
+Pop1005_001	CCAGCT	CTTGTA
+Pop1005_008	TAGGTCA	CTTGTA
+Pop1105_006	TAATTCG	CTTGTA
+Pop1602_005	TTCAGAG	CTTGTA
+Pop1002_005	CCAGGTA	CTTGTA
+Pop1601_008	CAAGCTG	CTTGTA
+Pop1008_007	AATAAGCG	CTTGTA
+Pop1604_006	TAGCTG	CTTGTA
+Pop1203_002	CGCCTA	CTTGTA
+Pop1105_007	TGAGGCG	CTTGTA
+Pop1007_006	ACTGCCG	CTTGTA
+Pop1303_007	CGTCAGA	CTTGTA
+Pop1101_001	GGCACCT	CTTGTA
+Pop1002_008	CTACGCCA	CTTGTA
+Pop1604_007	AAGTGCAA	CTTGTA
+Pop1601_002	GCGTAT	CTTGTA
+Pop1101_003	CCTTAG	CTTGTA
+Pop1007_003	ATGTTCA	CTTGTA
+Pop1107_007	CGTTGAA	CTTGTA
+Pop1202_002	GCATCTA	CTTGTA
+Pop1103_001	ATCTTAG	CTTGTA
+Pop1205_005	CCGTACCA	CTTGTA
+Pop1006_005	CGCGCTCA	CTTGTA
+Pop1204_008	CCTCGA	TCGTAT
+Pop1603_001	TCCATG	TCGTAT
+Pop1602_006	TGGCCAA	TCGTAT
+Pop1008_008	TTGCAGA	TCGTAT
+Pop1107_004	AACGTGG	TCGTAT
+Pop1006_004	AGAGCGT	TCGTAT
+Pop1603_004	ACCGTCCA	TCGTAT
+Pop1603_007	ATAAGCGA	TCGTAT
+Pop1603_008	TGCGAT	TCGTAT
+Pop1008_005	CTGGAT	TCGTAT
+Pop1604_005	GTCTGAA	TCGTAT
+Pop1105_005	GAACGTG	TCGTAT
+Pop1303_005	AGGAGCT	TCGTAT
+Pop1205_003	GTGCGTA	TCGTAT
+Pop1301_002	CGTCCACA	TCGTAT
+Pop1602_002	AAGATACG	TCGTAT
+Pop1205_001	ACTAAGGA	TCGTAT
+Pop1204_002	CGCACT	TCGTAT
+Pop1102_007	TATACGA	TCGTAT
+Pop1002_004	TGCGTAA	TCGTAT
+Pop1205_002	CGGCTCA	TCGTAT
+Pop1005_003	TTGAACT	TCGTAT
+Pop1107_005	GTGGTGCA	TCGTAT
+Pop1107_002	AGATACGA	TCGTAT
+Pop1204_007	CGTATG	CTTGTA
+Pop1006_007	CACCGT	CTTGTA
+Pop1604_002	ATGCGCG	CTTGTA
+Pop1602_003	ACGTGTA	CTTGTA
+Pop1102_003	ATATCTG	CTTGTA
+Pop1603_003	CATGTGA	CTTGTA
+Pop1001_004	TGGCGGCA	CTTGTA
+Pop1202_001	GCGAATAA	CTTGTA
+Pop1104_006	GATCTT	TCGTAT
+Pop1103_004	CACTTG	TCGTAT
+Pop1105_001	GAATCGG	TCGTAT
+Pop1202_003	CTATGAG	TCGTAT
+Pop1303_004	TATAGCT	TCGTAT
+Pop1602_007	TAGCTAG	TCGTAT
+Pop1203_001	CAGCTCCA	TCGTAT
+Pop1001_001	TAAGCGAA	TCGTAT
+Pop1006_003	ACTTGT	GGACGT
+Pop1107_001	CGTCAT	GGACGT
+Pop1301_008	TCTGGAA	GGACGT
+Pop1105_004	AGCGATG	GGACGT
+Pop1001_007	AGTCCGG	GGACGT
+Pop1301_004	AGTTCTA	GGACGT
+Pop1303_002	AGATAACG	GGACGT
+Pop1205_006	GTTGTACG	GGACGT
+Pop1104_005	CTCCAG	GGACGT
+Pop1107_003	CCACTG	GGACGT
+Pop1603_005	GTTACAG	GGACGT
+Pop1104_002	GCTATGA	GGACGT
+Pop1603_006	TTCTACG	GGACGT
+Pop1304_003	GCCAGAT	GGACGT
+Pop1103_006	CCTACGCA	GGACGT
+Pop1007_002	TACAGAGA	GGACGT
+Pop1103_005	ACGCCT	GGACGT
+Pop1203_004	ACCGTT	GGACGT
+Pop1007_005	ATTATCG	GGACGT
+Pop1201_004	GAAGCCT	GGACGT
+Pop1201_001	GAACTAT	GGACGT
+Pop1202_005	CTCACCG	GGACGT
+Pop1203_005	TGAAGCAA	GGACGT
+Pop1301_003	CGGTCGCA	GGACGT
+Pop1005_004	GTCATT	GGACGT
+Pop1102_004	CCGATT	GGACGT
+Pop1202_006	GTCCAAG	GGACGT
+Pop1602_008	TCGCACG	GGACGT
+Pop1201_002	TCTTAGA	GGACGT
+Pop1304_004	AGTTACT	GGACGT
+Pop1101_005	GTTATTCA	GGACGT
+Pop1104_001	CTGAAGAA	GGACGT
+Pop1303_003	CTCGCA	AACAGAT
+Pop1107_008	CCAGCT	AACAGAT
+Pop1201_007	TAGGTCA	AACAGAT
+Pop1304_008	TAATTCG	AACAGAT
+Pop1601_005	TTCAGAG	AACAGAT
+Pop1604_003	CCAGGTA	AACAGAT
+Pop1303_001	CAAGCTG	AACAGAT
+Pop1104_003	AATAAGCG	AACAGAT
+Pop1002_007	TAGCTG	AACAGAT
+Pop1304_005	CGCCTA	AACAGAT
+Pop1204_003	TGAGGCG	AACAGAT
+Pop1602_004	ACTGCCG	AACAGAT
+Pop1601_007	CGTCAGA	AACAGAT
+Pop1103_002	GGCACCT	AACAGAT
+Pop1103_008	CTACGCCA	AACAGAT
+Pop1601_001	AAGTGCAA	AACAGAT
+Pop1102_008	GCGTAT	AACAGAT
+Pop1204_001	CCTTAG	AACAGAT
+Pop1601_003	ATGTTCA	AACAGAT
+Pop1201_003	CGTTGAA	AACAGAT
+Pop1604_004	GCATCTA	AACAGAT
+Pop1008_001	ATCTTAG	AACAGAT
+Pop1201_008	CCGTACCA	AACAGAT
+Pop1304_002	CGCGCTCA	AACAGAT
+Pop1007_007	CCTCGA	AACAGAT
+Pop1002_006	TCCATG	AACAGAT
+Pop1304_006	TGGCCAA	AACAGAT
+Pop1002_001	TTGCAGA	AACAGAT
+Pop1304_007	AACGTGG	AACAGAT
+Pop1101_002	AGAGCGT	AACAGAT
+Pop1202_004	ACCGTCCA	AACAGAT
+Pop1204_006	ATAAGCGA	AACAGAT
+Pop1603_002	TGCGAT	CTTGTTA
+Pop1105_008	CTGGAT	CTTGTTA
+Pop1102_001	GTCTGAA	CTTGTTA
+Pop1303_006	GAACGTG	CTTGTTA
+Pop1604_008	AGGAGCT	CTTGTTA
+Pop1101_004	GTGCGTA	CTTGTTA
+Pop1601_006	CGTCCACA	CTTGTTA
+Pop1303_008	AAGATACG	CTTGTTA
+Pop1008_002	ACTAAGGA	CTTGTTA
+Pop1203_006	CGCACT	CTTGTTA
+Pop1203_008	TATACGA	CTTGTTA
+Pop1005_002	TGCGTAA	CTTGTTA
+Pop1301_006	CGGCTCA	CTTGTTA
+Pop1102_006	TTGAACT	CTTGTTA
+Pop1204_005	GTGGTGCA	CTTGTTA
+Pop1203_003	AGATACGA	CTTGTTA
+Pop1008_003	CGTATG	CTTGTTA
+Pop1205_007	CACCGT	CTTGTTA
+Pop1201_006	ATGCGCG	CTTGTTA
+Pop1101_008	ACGTGTA	CTTGTTA
+Pop1005_005	ATATCTG	CTTGTTA
+Pop1103_007	CATGTGA	CTTGTTA
+Pop1007_001	TGGCGGCA	CTTGTTA
+Pop1301_001	GCGAATAA	CTTGTTA
+Pop1107_006	GATCTT	CTTGTTA
+Pop1102_005	CACTTG	CTTGTTA
+Pop1006_008	GAATCGG	CTTGTTA
+Pop1101_006	CTATGAG	CTTGTTA
+Pop1005_006	TATAGCT	CTTGTTA
+Pop1202_008	TAGCTAG	CTTGTTA
+Pop1301_005	CAGCTCCA	CTTGTTA
+Pop1301_007	TAAGCGAA	CTTGTTA
+Pop1201_005	ACTTGT	TCGTAAT
+Pop1002_003	CGTCAT	TCGTAAT
+Pop1104_007	TCTGGAA	TCGTAAT
+Pop1001_005	AGCGATG	TCGTAAT
+Pop1601_004	AGTCCGG	TCGTAAT
+Pop1001_006	AGTTCTA	TCGTAAT
+Pop1602_001	AGATAACG	TCGTAAT
+Pop1001_003	GTTGTACG	TCGTAAT
+Pop1205_008	CTCCAG	TCGTAAT
+Pop1203_007	CCACTG	TCGTAAT
+Pop1102_002	GTTACAG	TCGTAAT
+Pop1105_002	GCTATGA	TCGTAAT
+Pop1006_002	TTCTACG	TCGTAAT
+Pop1008_004	GCCAGAT	TCGTAAT
+Pop1006_006	CCTACGCA	TCGTAAT
+Pop1007_004	TACAGAGA	TCGTAAT
+Pop1204_004	ACGCCT	TCGTAAT
+Pop1304_001	ACCGTT	TCGTAAT
+Pop1007_008	ATTATCG	TCGTAAT
+Pop1104_008	GAAGCCT	TCGTAAT
+Pop1001_002	GAACTAT	TCGTAAT
+Pop1104_004	CTCACCG	TCGTAAT
+Pop1006_001	TGAAGCAA	TCGTAAT
+Pop1101_007	CGGTCGCA	TCGTAAT
+Pop1001_008	GTCATT	TCGTAAT
+Pop1005_007	CCGATT	TCGTAAT
+Pop1105_003	GTCCAAG	TCGTAAT
+Pop1205_004	TCGCACG	TCGTAAT
+Pop1202_007	TCTTAGA	TCGTAAT
+Pop1002_002	AGTTACT	TCGTAAT
+Pop1008_006	GTTATTCA	TCGTAAT
+Pop1604_001	CTGAAGAA	TCGTAAT
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
